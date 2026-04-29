@@ -209,6 +209,11 @@ tempCodeRunnerFile.py
 # PyPI configuration file
 .pypirc
 
+# Node / Vite
+node_modules/
+dist/
+*.tsbuildinfo
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
