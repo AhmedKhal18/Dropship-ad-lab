@@ -1,8 +1,13 @@
+import logging
+from os import getenv
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .ai_service import analyze_product
 from .schemas import AnalyzeRequest, AnalyzeResponse, HealthResponse
+
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(title="Dropship Ad Lab API", version="0.1.0")
 
@@ -11,14 +16,9 @@ origins = [
     "http://127.0.0.1:5173",
 ]
 
-try:
-    from os import getenv
-
-    frontend_origin = getenv("FRONTEND_ORIGIN")
-    if frontend_origin:
-        origins.append(frontend_origin)
-except Exception:
-    pass
+frontend_origin = getenv("FRONTEND_ORIGIN")
+if frontend_origin:
+    origins.append(frontend_origin)
 
 app.add_middleware(
     CORSMiddleware,
